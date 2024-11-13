@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    deps:
+      - release
+
+  build:
+    cmds:
+      - go build -o bin/webhook-proxy main.go
+
+  release:
+    envs:
+      GOOS: linux
+      GOARCH: amd64
+    vars:
+      GOOS: linux
+      GOARCH: amd64
+    cmds:
+      - go build -o bin/{{ .GOOS }}-{{ .GOARCH }}/webhook-proxy main.go
